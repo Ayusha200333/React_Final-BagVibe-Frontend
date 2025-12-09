@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import UserLayout from './components/Layout/UserLayout'
+import Home from './pages/Home'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +12,9 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<UserLayout/>}>{/*User layout*/}</Route>
+      <Route path='/' element={<UserLayout/>}>
+        <Route index element={<Home/>}/>
+      </Route>
       <Route>{/*Admin layout*/}</Route>
     </Routes>
     </BrowserRouter>
