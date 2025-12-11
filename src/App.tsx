@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import { Toaster } from 'sonner'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import ProfilePage from './pages/ProfilePage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
         <Route index element={<Home/>}/>
         <Route path='login' element={<LoginPage/>} />
         <Route path='register' element={<RegisterPage/>} />
+        <Route path='profile' element={<ProfilePage/>} />
 
       </Route>
       <Route>{/*Admin layout*/}</Route>
