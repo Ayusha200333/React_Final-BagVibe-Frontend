@@ -7,6 +7,7 @@ import UserLayout from './components/Layout/UserLayout'
 import Home from './pages/Home'
 import { Toaster } from 'sonner'
 import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,8 @@ function App() {
       <Route path='/' element={<UserLayout/>}>
         <Route index element={<Home/>}/>
         <Route path='login' element={<LoginPage/>} />
+        <Route path='register' element={<RegisterPage/>} />
+
       </Route>
       <Route>{/*Admin layout*/}</Route>
     </Routes>

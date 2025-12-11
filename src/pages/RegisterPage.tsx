@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import login from "../assets/login.avif"
+import register from "../assets/register.jpg"
 
-const LoginPage = () => {
+const RegisterPage = () => {
+    const [name,setName] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("User Login:", {email,password})
+        console.log("User Registered:", {name,email,password})
     }
-    
   return (
     <div className='flex'>
         <div className='w-full md:w-1/2 flex flex-col justify-center items-center p-8 md:p-12'>
@@ -23,6 +23,19 @@ const LoginPage = () => {
                     Enter your username and password to Login 
                 </p>
                 <div className='mb-4'>
+                    <label className="block text-sm font-semibold mb-2">
+                        Name
+                    </label>
+                    <input 
+                        type="text" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        className='w-full p-2 border rounded'
+                        placeholder='Enter your name'
+                    />
+                </div>
+
+                 <div className='mb-4'>
                     <label className="block text-sm font-semibold mb-2">
                         Email
                     </label>
@@ -50,13 +63,13 @@ const LoginPage = () => {
                 <button 
                     type='submit'
                     className='w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition'>
-                        Sign In
+                        Sign Up
                 </button>
 
                 <p className='mt-6 text-center text-sm'>
                     Don't have an account?{" "}
-                    <Link to="/register" className="text-blue-500">
-                        Register
+                    <Link to="/login" className="text-blue-500">
+                        Login
                     </Link>
                 </p>
             </form>
@@ -65,7 +78,7 @@ const LoginPage = () => {
         <div className='hidden md:block w-1/2 bg-gray-800'>
             <div className='h-full flex flex-col justify-center items-center'>
                 <img 
-                    src={login} 
+                    src={register} 
                     alt="Login to account" 
                     className='h-[750px] w-full object-cover' 
                 />
@@ -76,4 +89,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage
