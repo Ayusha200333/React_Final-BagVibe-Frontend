@@ -8,6 +8,7 @@ const Cart = ({drawerOpen , toogleCart}) => {
     const navigate = useNavigate()
 
     const handleCheckout = () => {
+        toogleCart();
         navigate("/checkout")
     }
   

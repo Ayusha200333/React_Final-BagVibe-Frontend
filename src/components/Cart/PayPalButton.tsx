@@ -5,7 +5,7 @@ const PayPalCheckoutButton = ({ amount, onSuccess, onError }) => {
   return (
     <PayPalScriptProvider
       options={{
-        "client-id": "AXRkM-PcuvutlJjXPS8mox16Hmb_OxWdbC4sKIASTP8KVyYstIhP2MwrV2SMDMh9g25CFzVkkpIbPWe1",
+        "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
         currency: "LKR"
       }}
     >
