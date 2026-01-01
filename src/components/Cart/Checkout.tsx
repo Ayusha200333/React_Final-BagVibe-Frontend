@@ -6,21 +6,21 @@ import axios from 'axios';
 import type { AppDispatch, RootState } from '../../redux/store';
 import { createCheckout } from '../../redux/slices/checkoutSlice';
 
-// interface Product {
-//   _id?: string;
-//   productId?: string;
-//   name: string;
-//   size?: string;
-//   color?: string;
-//   price: number;
-//   image: string;
-//   quantity?: number;
-// }
+interface Product {
+  _id?: string;
+  productId?: string;
+  name: string;
+  size?: string;
+  color?: string;
+  price: number;
+  image: string;
+  quantity?: number;
+}
 
-// interface Cart {
-//   products: Product[];
-//   totalPrice: number;
-// }
+interface Cart {
+  products: Product[];
+  totalPrice: number;
+}
 
 interface ShippingAddress {
   firstName: string;

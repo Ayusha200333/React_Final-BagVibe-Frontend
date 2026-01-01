@@ -8,15 +8,15 @@ import { fetchProductDetails, fetchSimilarProducts } from "../../redux/slices/pr
 import { addToCart } from "../../redux/slices/cartSlice";
 import type { RootState, AppDispatch } from "../../redux/store";
 
-// interface DetailedProduct extends GridProduct {
+interface DetailedProduct extends GridProduct {
   
-//   description?: string;
-//   brand?: string;
-//   material?: string;
-//   sizes?: string[];
-//   colors?: string[];
-//   discountPrice?: number;
-// }
+  description?: string;
+  brand?: string;
+  material?: string;
+  sizes?: string[];
+  colors?: string[];
+  discountPrice?: number;
+}
 
 interface ProductDetailsProps {
   productId?: string; 
