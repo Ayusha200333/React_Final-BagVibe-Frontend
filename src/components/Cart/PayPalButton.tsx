@@ -1,34 +1,49 @@
-import React from 'react'
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
+import React from 'react';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
-const PayPalCheckoutButton = ({ amount, onSuccess, onError }) => {
+interface PayPalCheckoutButtonProps {
+  amount: string | number;
+  onSuccess: (details: any) => void;
+  onError: (err: any) => void;
+}
+
+const initialOptions = {
+  clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID || "YOUR_SANDBOX_CLIENT_ID_HERE", 
+  currency: "USD",
+  intent: "capture",
+};
+
+const PayPalButton: React.FC<PayPalCheckoutButtonProps> = ({
+  amount,
+  onSuccess,
+  onError,
+}) => {
   return (
-    <PayPalScriptProvider
-      options={{
-        "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
-        currency: "LKR"
-      }}
-    >
+    <PayPalScriptProvider options={initialOptions}>
       <PayPalButtons
-        style={{ layout: "vertical" }}
-        createOrder={(data, actions) => {
+        style={{ layout: 'vertical' }}
+        createOrder={(_data, actions) => {
           return actions.order.create({
             purchase_units: [
               {
                 amount: {
-                  value: amount.toString()
-                }
-              }
-            ]
-          })
+                  value: Number(amount).toFixed(2),
+                  currency_code: 'USD',
+                },
+              },
+            ],
+            intent: 'CAPTURE'
+          });
         }}
-        onApprove={(data, actions) => {
-          return actions.order.capture().then(onSuccess)
+        onApprove={(_data, actions) => {
+          return actions.order!.capture().then((details) => {
+            onSuccess(details);
+          });
         }}
         onError={onError}
       />
     </PayPalScriptProvider>
-  )
-}
+  );
+};
 
-export default PayPalCheckoutButton
+export default PayPalButton;

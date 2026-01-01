@@ -1,71 +1,110 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { FaFilter } from 'react-icons/fa'
-import FilterSideBar from '../components/Products/FilterSideBar'
-import SortOptions from '../components/Products/SortOptions'
-import ProductGrid from '../components/Products/ProductGrid'
+import React, { useEffect, useRef, useState } from 'react';
+import { FaFilter } from 'react-icons/fa';
+import FilterSideBar from '../components/Products/FilterSideBar';
+import SortOptions from '../components/Products/SortOptions';
+import ProductGrid from '../components/Products/ProductGrid';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductsByFilters } from '../redux/slices/productsSlice';
+import type { AppDispatch, RootState } from '../redux/store';
 
-const CollectionPage = () => {
-    const [products,setProducts] = useState([])
-    const sidebarRef = useRef(null)
-    const [isSidebarOpen,setIsSidebarOpen] = useState(false)
+const CollectionPage: React.FC = () => {
+  const { Collection } = useParams<{ Collection?: string }>();
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch<AppDispatch>();
+  const { products, loading, error } = useSelector((state: RootState) => state.products);
 
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen)
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const filters: Record<string, string> = {
+      limit: '20', 
+    };
+
+    searchParams.forEach((value, key) => {
+      filters[key] = value;
+    });
+
+    if (Collection && Collection !== 'all') {
+      filters.collection = Collection;
     }
 
-    const handleClickOutside= (e) => {
-        if(sidebarRef.current && !sidebarRef.current.contains(e.target)){
-            setIsSidebarOpen(false)
-        }
+    console.log('Dispatching filters:', filters); 
+    dispatch(fetchProductsByFilters(filters));
+  }, [dispatch, Collection, searchParams]);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    if (isSidebarOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
-    useEffect(() => {
-        document.addEventListener("mousedown" , handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSidebarOpen]);
 
-        return () => {
-            document.removeEventListener("mousedown",handleClickOutside)
+  return (
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      <button
+        onClick={toggleSidebar}
+        className="lg:hidden fixed bottom-4 right-4 z-50 bg-black text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 hover:bg-gray-800 transition"
+      >
+        <FaFilter />
+        Filters
+      </button>
 
-        }
-    },[])
+      <div
+        ref={sidebarRef}
+        className={`
+          fixed inset-y-0 left-0 z-40 w-72 bg-white shadow-2xl overflow-y-auto
+          transition-transform duration-300 ease-in-out
+          lg:static lg:translate-x-0 lg:shadow-none lg:w-64 lg:min-h-screen
+          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
+        <div className="p-6 border-b lg:hidden relative">
+          <h3 className="text-xl font-semibold">Filters</h3>
+          <button
+            onClick={toggleSidebar}
+            className="absolute top-4 right-4 text-gray-500 hover:text-black text-3xl"
+          >
+            ×
+          </button>
+        </div>
+        <FilterSideBar />
+      </div>
 
-    useEffect(() => {
-        setTimeout(() => {
-            const fetchProducts = [
-                { _id: 1, name: "Product 1", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=1" }] },
-                { _id: 2, name: "Product 2", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=2" }] },
-                { _id: 3, name: "Product 3", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=3" }] },
-                { _id: 4, name: "Product 4", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=4" }] },
-                { _id: 5, name: "Product 5", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=5" }] },
-                { _id: 6, name: "Product 6", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=6" }] },
-                { _id: 7, name: "Product 7", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=7" }] },
-                { _id: 8, name: "Product 8", price: 1500, images: [{ url: "https://picsum.photos/500/500?random=8" }] },
-            ];
-            setProducts(fetchProducts)
-        }, 1000)
-    },[])
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
 
-    return (
-    <div className='flex flex-col lg:flex-row'>
-        <button onClick={toggleSidebar} className='lg:hidden border p-2 flex justify-center items-center'>
-            <FaFilter className='mr-2'/>Filters
-        </button>
+      <div className="grow p-4 lg:p-8">
+        <h2 className="text-3xl font-bold uppercase mb-6 text-center lg:text-left">
+          {Collection === 'all' || !Collection ? 'ALL COLLECTION' : Collection}
+        </h2>
 
-        <div ref={sidebarRef} className={`${isSidebarOpen ? "translate-x-0" : "translate-x-full"} fixed inset-y-0 z-50 left-0 w-64 bg-white overflow-y-auto transition-transform duration-300 lg:static lg:translate-x-0`}>
-            <FilterSideBar/>
+        <div className="mb-8 flex justify-end">
+          <SortOptions />
         </div>
 
-        <div className='flex-grow p-4'>
-            <h2 className='text-2xl uppercase mb-4'>
-                All Collection
-            </h2>
-
-            <SortOptions/>
-
-            <ProductGrid products={products}/>
-        </div>
-
+        <ProductGrid products={products} loading={loading} error={error} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CollectionPage
+export default CollectionPage;
