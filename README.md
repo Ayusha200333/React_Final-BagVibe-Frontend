@@ -91,6 +91,19 @@ Checkout Setion:
 (<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/33085306-628b-4062-b7e3-3c2f924eea1d" />
 )
 
+Admin Dashboard :
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/fe5b6f81-6304-4c9e-83a9-7e7b89c9ee0c" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/d3304e31-e6e1-4461-9578-20d03b4c6c79" />
+
+Product Management:
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/af4ae1d8-158b-4d59-aa21-39ad0a01f3c2" />
+
+Order Management: 
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/e90d18ee-1e19-4ad6-a561-7218d9ea429a" />
+
+
+
+
 **--Clone the repository--**
 
 git clone: https://github.com/Ayusha200333/React_Final-BagVibe-Frontend
