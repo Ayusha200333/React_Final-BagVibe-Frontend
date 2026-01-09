@@ -35,7 +35,7 @@ const SearchBar = () => {
     navigate(`/collections/all?search=${encodeURIComponent(trimmedTerm)}`);
     
     setIsOpen(false);
-    setSearchTerm(''); // Clear input after search
+    setSearchTerm(''); 
   };
 
   const handleClose = () => {
@@ -45,7 +45,6 @@ const SearchBar = () => {
 
   return (
     <>
-      {/* Full-screen overlay when search is open (mobile-friendly) */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden"
@@ -53,9 +52,7 @@ const SearchBar = () => {
         />
       )}
 
-      {/* Search Bar Container */}
       <div className="relative flex items-center">
-        {/* Closed State - Magnifying Glass Icon */}
         {!isOpen && (
           <button
             onClick={handleSearchToggle}
@@ -66,7 +63,6 @@ const SearchBar = () => {
           </button>
         )}
 
-        {/* Open State - Full Search Input */}
         {isOpen && (
           <div
             className="fixed inset-x-0 top-0 bg-white shadow-lg z-50 lg:relative lg:inset-auto lg:top-auto lg:shadow-none lg:bg-transparent"
@@ -84,17 +80,14 @@ const SearchBar = () => {
                              transition-all duration-300 shadow-inner text-lg"
                 />
 
-                {/* Search Icon */}
                 <div className="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-500">
                   <HiMagnifyingGlass className="h-7 w-7" />
                 </div>
 
-                {/* Submit Button (hidden, for accessibility) */}
                 <button type="submit" className="sr-only">
                   Search
                 </button>
 
-                {/* Close Button */}
                 <button
                   type="button"
                   onClick={handleClose}

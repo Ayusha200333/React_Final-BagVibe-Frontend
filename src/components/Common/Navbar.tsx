@@ -26,9 +26,7 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Main Navbar */}
       <nav className="container mx-auto flex items-center justify-between py-6 px-6 lg:px-8">
-        {/* Logo */}
         <div>
           <Link 
             to="/" 
@@ -38,7 +36,6 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation Links */}
         <div className="hidden lg:flex items-center space-x-10">
           <Link 
             to="/collections/all?gender=Men" 
@@ -66,9 +63,7 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Right Icons & Actions */}
         <div className="flex items-center space-x-5">
-          {/* Admin Link */}
           {user && user.role === "admin" && (
             <Link 
               to="/admin" 
@@ -78,7 +73,6 @@ const Navbar: React.FC = () => {
             </Link>
           )}
 
-          {/* Profile */}
           <Link 
             to="/profile" 
             className="group p-2 rounded-full hover:bg-gray-100 transition-all duration-300"
@@ -86,7 +80,6 @@ const Navbar: React.FC = () => {
             <HiOutlineUser className="h-6 w-6 text-gray-700 group-hover:text-indigo-600 transition-colors" />
           </Link>
 
-          {/* Cart */}
           <button 
             onClick={toggleCart} 
             className="relative group p-2 rounded-full hover:bg-gray-100 transition-all duration-300"
@@ -99,12 +92,10 @@ const Navbar: React.FC = () => {
             )}
           </button>
 
-          {/* Search Bar */}
           <div className="hidden md:block">
             <SearchBar />
           </div>
 
-          {/* Mobile Menu Toggle */}
           <button 
             onClick={toggleNavDrawer} 
             className="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-all"
@@ -114,18 +105,14 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {/* Cart Drawer (unchanged logic) */}
       <Cart drawerOpen={drawerOpen} toggleCart={toggleCart} />
 
-      {/* Mobile Navigation Drawer - Modern Glassmorphism Style */}
       <div className={`fixed inset-0 z-50 transition-all duration-500 ${navDrawerOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
-        {/* Backdrop */}
         <div 
           className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${navDrawerOpen ? 'opacity-100' : 'opacity-0'}`}
           onClick={toggleNavDrawer}
         />
 
-        {/* Drawer Panel */}
         <div 
           className={`absolute top-0 left-0 w-80 h-full bg-white/95 backdrop-blur-2xl shadow-2xl transform transition-transform duration-500 ease-out ${
             navDrawerOpen ? 'translate-x-0' : '-translate-x-full'

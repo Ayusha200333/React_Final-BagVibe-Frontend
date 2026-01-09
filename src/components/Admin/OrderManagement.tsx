@@ -83,7 +83,6 @@ const OrderManagement: React.FC = () => {
         </button> */}
       </div>
 
-      {/* Orders Table */}
       <div className="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-200">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -100,7 +99,6 @@ const OrderManagement: React.FC = () => {
               {orders.length > 0 ? (
                 orders.map((order: Order) => (
                   <tr key={order._id} className="hover:bg-gray-50 transition-all duration-200">
-                    {/* Order ID */}
                     <td className="px-6 py-5 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="h-10 w-10 bg-linear-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-sm">
@@ -109,7 +107,6 @@ const OrderManagement: React.FC = () => {
                       </div>
                     </td>
                     
-                    {/* ✅ FIXED Customer Column */}
                     <td className="px-6 py-5">
                       <div className="flex items-center">
                         <div className="shrink-0 h-10 w-10">
@@ -128,7 +125,6 @@ const OrderManagement: React.FC = () => {
                         </div>
                         <div className="ml-4 min-w-0 flex-1">
                           <div className="text-sm font-semibold text-gray-900 truncate max-w-[200px]">
-                            {/* ✅ Smart Customer Name Logic */}
                             {order.user?.name || 
                              `Customer #${order._id.slice(-4)}` || 
                              'Anonymous'}
@@ -140,12 +136,10 @@ const OrderManagement: React.FC = () => {
                       </div>
                     </td>
 
-                    {/* Total Price */}
                     <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-900 font-semibold">
                       Rs. {order.totalPrice.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                     </td>
 
-                    {/* Status Badge */}
                     <td className="px-6 py-5 whitespace-nowrap">
                       <span
                         className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold shadow-sm ${
@@ -216,7 +210,6 @@ const OrderManagement: React.FC = () => {
         </div>
       </div>
 
-      {/* Stats Cards */}
       {orders.length > 0 && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="group bg-linear-to-br from-blue-500 to-blue-600 text-white p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1">
