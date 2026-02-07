@@ -3,7 +3,6 @@ BagVibe - Full Stack E-Commerce Application
 **--Project Description--**
 
 BagVibe is a modern full-stack e-commerce web application specializing in bags (handbags, backpacks, travel bags, etc.). It allows users to browse products, add items to cart, manage wishlist, place orders, and includes admin features for product management. The project is built using the MERN stack (MongoDB, Express.js, React.js, Node.js).
-This repository contains the Backend code.
 
 **--Technologies and Tools Used--**
 
